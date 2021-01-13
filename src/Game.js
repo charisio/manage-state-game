@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Game = ({numCorrect, numQuestions, checkIfTrue, checkIfFalse}) => {
+const Game = ({calculateScore}) => {
   	const value1 = Math.floor(Math.random() * 100);
     const value2 = Math.floor(Math.random() * 100);
     const value3 = Math.floor(Math.random() * 100);
@@ -10,11 +10,8 @@ const Game = ({numCorrect, numQuestions, checkIfTrue, checkIfFalse}) => {
 		<div className="equation">
 			<p className="text">{`${value1} + ${value2} + ${value3} = ${proposedAnswer}`}</p>
 		</div>
-		<button onClick={() => checkIfTrue(value1, value2, value3, proposedAnswer)}>True</button>
-		<button onClick={() => checkIfFalse(value1, value2, value3, proposedAnswer)}>False</button>
-		<p className="text">
-			Your Score: {numCorrect}/{numQuestions}
-		</p>
+		<button name="true" onClick={(e) => calculateScore(e, value1, value2, value3, proposedAnswer)}>True</button>
+		<button name="false" onClick={(e) => calculateScore(e, value1, value2, value3, proposedAnswer)}>False</button>
 	</div>);
 };
 

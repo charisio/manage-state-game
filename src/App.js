@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import Game from './Game';
+import Score from './Score';
 import './App.css';
 
 class App extends Component {
@@ -12,30 +13,18 @@ class App extends Component {
     };
   }
   
-  checkIfTrue = (value1, value2, value3, proposedAnswer) => {
-    if (value1 + value2 + value3 === proposedAnswer) {
-    	this.setState((prevState) => ({
-        	numCorrect: prevState.numCorrect + 1,
-          	numQuestions: prevState.numQuestions + 1
-        }));
-    } else {
-    	this.setState((prevState) => ({
-        	numQuestions: prevState.numQuestions + 1
-        }));
+  calculateScore = (event, value1, value2, value3, proposedAnswer) => {
+    const total = value1 + value2 + value3;
+    const buttonClicked = event.target.name;
+    if ((total === proposedAnswer && buttonClicked === 'true') || (total !== proposedAnswer && buttonClicked === 'false')) {
+    	this.setState(currState => ({
+        	numCorrect: currState.numCorrect + 1,
+      }));
     }
-  };
-
-checkIfFalse = (value1, value2, value3, proposedAnswer) => {
-    if (value1 + value2 + value3 !== proposedAnswer) {
-    	this.setState((prevState) => ({
-        	numCorrect: prevState.numCorrect + 1,
-          	numQuestions: prevState.numQuestions + 1
-        }));
-    } else {
-    	this.setState((prevState) => ({
-        	numQuestions: prevState.numQuestions + 1
-        }));
-    }
+    
+    this.setState((prevState) => ({
+      numQuestions: prevState.numQuestions + 1
+    }));
   };
   
   render() {
@@ -46,7 +35,8 @@ checkIfFalse = (value1, value2, value3, proposedAnswer) => {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">ReactND - Coding Practice</h1>
         </header>
-		<Game numCorrect={numCorrect} numQuestions={numQuestions} checkIfTrue={this.checkIfTrue} checkIfFalse={this.checkIfFalse}/>
+		<Game calculateScore={this.calculateScore}/>
+		<Score numCorrect={numCorrect} numQuestions={numQuestions}/>
       </div>
     );
   }
