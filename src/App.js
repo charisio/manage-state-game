@@ -15,7 +15,8 @@ class App extends Component {
   checkIfTrue = (value1, value2, value3, proposedAnswer) => {
     if (value1 + value2 + value3 === proposedAnswer) {
     	this.setState((prevState) => ({
-        	numCorrect: prevState.numCorrect + 1
+        	numCorrect: prevState.numCorrect + 1,
+          	numQuestions: prevState.numQuestions + 1
         }));
     } else {
     	this.setState((prevState) => ({
@@ -27,7 +28,8 @@ class App extends Component {
 checkIfFalse = (value1, value2, value3, proposedAnswer) => {
     if (value1 + value2 + value3 !== proposedAnswer) {
     	this.setState((prevState) => ({
-        	numCorrect: prevState.numCorrect + 1
+        	numCorrect: prevState.numCorrect + 1,
+          	numQuestions: prevState.numQuestions + 1
         }));
     } else {
     	this.setState((prevState) => ({
